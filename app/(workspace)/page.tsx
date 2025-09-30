@@ -7,7 +7,6 @@ export default async function Home() {
   const user = await currentUser()
   return (
     <div>
-      <UserButton user={user}/>
     </div>
   );
 }

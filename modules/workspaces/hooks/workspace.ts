@@ -19,9 +19,10 @@ export function useCreateWorkspace(){
     })
 }
 
-export function useGetWorkspaceById(id:string){
+export function useGetWorkspace(id?: string){
     return useQuery({
         queryKey: ["workspace", id],
-        queryFn: async()=>getWorkspaceById(id)
+        queryFn: async()=>getWorkspaceById(id as string),
+        enabled: Boolean(id),
     })
 }

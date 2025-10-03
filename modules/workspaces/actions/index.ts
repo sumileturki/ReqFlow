@@ -26,7 +26,7 @@ export const initializeWorkspace = async()=>{
             },
             update:{},
             create:{
-                name: "Personal WprkSpace",
+                name: "Personal Workspace",
                 description:"Default workspace for persona; use",
                 ownerId: user.id,
                 members:{

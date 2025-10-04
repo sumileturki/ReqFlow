@@ -227,4 +227,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-ReqFlow 🚀 - Making API testing collaborative and efficient! 🚀
+**Postboy** - Making API testing collaborative and efficient! 🚀

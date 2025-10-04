@@ -3,11 +3,15 @@ import Footer from "@/modules/layout/components/footer";
 import Header from "@/modules/layout/components/header";
 import { initializeWorkspace } from "@/modules/workspaces/actions";
 import TabbedLeftPanel from "@/modules/workspaces/components/tabbed-left";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const Rootlayout = async ({ children }: { children: React.ReactNode }) => {
     const workspace = await initializeWorkspace()
     const user = await currentUser()
+     if (!user) {
+        redirect("/sign-in"); 
+    }
 
     console.log(workspace)
   return (

@@ -34,7 +34,6 @@ const Modal: React.FC<ModalProps> = ({
   submitText = 'Submit',
   cancelText = 'Cancel',
   showFooter = true,
-  submitVariant = "default",
   size,
   className = ''
 }) => {

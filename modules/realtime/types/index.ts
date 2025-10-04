@@ -1,4 +1,4 @@
-import { DIRECTION, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 export interface CreateWebSocketPresetInput {
   name: string;
@@ -17,7 +17,7 @@ export interface UpdateWebSocketPresetInput {
 }
 
 
-export type WebSocketMessageDirection = DIRECTION
+export type WebSocketMessageDirection = "SENT" | "RECEIVED"
 
 export interface SaveWebSocketMessageInput {
   presetId?: string;

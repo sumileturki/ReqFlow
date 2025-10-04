@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { PlugZap, Github, Mail, Twitter, Sun, Moon, Monitor } from "lucide-react";
+import { PlugZap, Github, Mail, Twitter,  } from "lucide-react";
 
 const Footer = () => {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
@@ -12,7 +12,8 @@ const Footer = () => {
       {/* Left Side */}
       <div className="flex items-center space-x-2">
         <PlugZap size={18} className="text-indigo-400" />
-        <span className="font-semibold text-indigo-300">EchoBox</span>
+        <span className="font-semibold text-indigo-300">ReqFlow 🚀
+        </span>
         <span className="text-xs text-gray-500">© {new Date().getFullYear()}</span>
       </div>
 

@@ -1,6 +1,5 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { signIn } from '@/lib/auth-client'
 import { Chrome, Github } from 'lucide-react'
 import Link from 'next/link'

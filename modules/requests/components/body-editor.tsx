@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/form'
 import { RotateCcw, Copy, Check, Code, AlignLeft, FileText, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 import { useRequestPlaygroundStore } from '../store/useRequestStore'
 import { useWorkspaceStore } from '@/modules/layout/store'
@@ -99,32 +100,20 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
 
   const onGenerateBody = async (promptText: string) => {
     try {
-     
-    
-      if (bodyValue) {
-        try {
-          JSON.parse(bodyValue);
-        } catch (e) {
-          
-          console.log('Invalid existing JSON, generating new schema');
-        }
-      }
-
-      const result = await mutateAsync({
-        prompt: promptText,
-        method: tabs.find(t => t.id === activeTabId)?.method || 'POST',
-        endpoint: tabs.find(t => t.id === activeTabId)?.url || '/',
-        context: `Generate a JSON body with the following requirements: ${promptText}`,
-       
-      });
-
-      if (result?.jsonBody) {
-        form.setValue('body', JSON.stringify(result.jsonBody, null, 2));
-      }
+      // Simple JSON body generation based on prompt
+      const sampleJson = {
+        message: promptText,
+        timestamp: new Date().toISOString(),
+        data: {}
+      };
+      
+      form.setValue('body', JSON.stringify(sampleJson, null, 2));
       setShowGenerateDialog(false);
       setPrompt('');
+      toast.success("Generated sample JSON body");
     } catch (error) {
       console.error('Failed to generate JSON body:', error);
+      toast.error("Failed to generate JSON body");
     }
   }
 

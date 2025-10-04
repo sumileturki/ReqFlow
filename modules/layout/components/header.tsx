@@ -41,7 +41,7 @@ const Header = ({ user }: Props) => {
       fontWeight="700"
       fill="url(#pingit-gradient)"
     >
-      EchoBox
+      ReqFlow
     </text>
 
     <style>{`

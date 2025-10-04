@@ -64,26 +64,16 @@ const AddNameModal = ({
            <Button 
           variant={"outline"} 
           size={"icon"} 
-          onClick={async () => {
-            if (!tab) return;
-            try {
-              const result = await mutateAsync({
-                workspaceName: tab.workspaceId || "Default Workspace",
-                method: (tab.method as "GET" | "POST" | "PUT" | "PATCH" | "DELETE") || "GET",
-                url: tab.url || "",
-                description: `Request in collection ${tab.collectionId || ""}`
-              });
-              
-              if (result.suggestions && result.suggestions.length > 0) {
-                setSuggestions(result.suggestions);
-                setName(result.suggestions[0].name);
-                toast.success("Generated name suggestions");
-              }
-            } catch (error) {
-              toast.error("Failed to generate name suggestions");
+          onClick={() => {
+            // Generate a simple name suggestion based on URL
+            if (tab?.url) {
+              const url = new URL(tab.url);
+              const pathParts = url.pathname.split('/').filter(Boolean);
+              const suggestion = pathParts.length > 0 ? pathParts[pathParts.length - 1] : 'Request';
+              setName(suggestion);
+              toast.success("Generated name suggestion");
             }
-          }} 
-        //   disabled={isPending}
+          }}
         >
           <Sparkles className="h-5 w-5 text-indigo-500" />
         </Button>

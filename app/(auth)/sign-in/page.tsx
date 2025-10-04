@@ -14,9 +14,9 @@ const LoginPage = () => {
         <div className='p-8 pb-6'>
           <div>
             <Link href={"/"}>
-              <h1 className='text-2xl font-bold'>Postman</h1>
+              <h1 className='text-2xl font-bold'>ReqFlow</h1>
             </Link>
-            <h1 className='mb-1 mt-4 text-xl font-semibold'>Sign in to PostMan</h1>
+            <h1 className='mb-1 mt-4 text-xl font-semibold'>Sign in to ReqFlow</h1>
             <p className="text-sm">Welcome back! Sign in to continue</p>
           </div>
 

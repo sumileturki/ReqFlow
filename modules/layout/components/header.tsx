@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UserProps } from "../types";
-import { Unplug } from "lucide-react";
+import { PlugZap, Unplug } from "lucide-react";
 import UserButton from "@/modules/authentication/components/user-button";
 import SearchBar from "./search-bar";
 import InviteMember from "./invite-members";
@@ -19,7 +19,7 @@ const Header = ({ user }: Props) => {
         onClick={() => console.log("PingIt clicked")}
         className="col-span-2 flex items-center space-x-2 hover:opacity-80 ml-4"
       >
-        <Unplug size={28} className="text-indigo-400" />
+        <PlugZap size={28} className="text-indigo-400" />
         <span className="text-indigo-600 text-xl font-semibold">PingIt</span>
       </button>
 

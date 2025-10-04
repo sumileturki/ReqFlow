@@ -3,6 +3,7 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import TabbedSidebar from "@/modules/collections/components/sidebar";
 import { useWorkspaceStore } from "@/modules/layout/store";
+import RequestPlayground from "@/modules/requests/components/request-playground";
 import  {useGetWorkspace} from "@/modules/workspaces/hooks/workspace";
 import { Loader } from "lucide-react";
 
@@ -24,7 +25,7 @@ import { Loader } from "lucide-react";
   return(
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel>
-        <h1> REquest Playground </h1>
+        <RequestPlayground/>
       </ResizablePanel>
       <ResizableHandle withHandle/>
 

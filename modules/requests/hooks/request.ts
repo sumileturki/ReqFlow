@@ -4,8 +4,10 @@ import {
   getAllRequestFromCollection,
   saveRequest,
   type Request,
+  
 } from "../actions";
 import { log } from "console";
+import { useRequestPlaygroundStore } from "../store/useRequestStore";
 
 export function useAddRequestToCollection(collectionId: string) {
   const queryClient = useQueryClient();
@@ -43,3 +45,17 @@ export function useSaveRequest(id: string) {
     },
   });
 }
+
+
+// export function useRunRequest(requestId: string) {
+
+//     const {setResponseViewerData} = useRequestPlaygroundStore();
+//     const queryClient = useQueryClient();
+//     return useMutation({
+//       mutationFn: async () => await run(requestId),
+//       onSuccess: (data) => {
+//         queryClient.invalidateQueries({ queryKey: ["requests"] });
+//         setResponseViewerData(data);
+//       },
+//     });
+//   }

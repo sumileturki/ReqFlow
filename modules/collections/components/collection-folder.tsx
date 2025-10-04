@@ -20,6 +20,7 @@ import DeleteCollectionModal from "./delete-collection";
 import SaveRequestToCollectionModal from "./add-request-model";
 import { useGetAllRequestFromCollection } from "@/modules/requests/hooks/request";
 import { REST_METHOD } from "@prisma/client";
+import { useRequestPlaygroundStore } from "@/modules/requests/store/useRequestStore";
 
 interface Props {
   collection: {
@@ -41,6 +42,8 @@ const CollectionFolder = ({ collection }: Props) => {
     isPending,
     isError,
   } = useGetAllRequestFromCollection(collection.id);
+
+  const {openRequestTab} = useRequestPlaygroundStore()
 
   const requestColorMap: Record<REST_METHOD, string> = {
     [REST_METHOD.GET]: "text-green-500",

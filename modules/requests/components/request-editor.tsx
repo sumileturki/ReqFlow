@@ -3,12 +3,11 @@
 import { useRequestPlaygroundStore } from "../store/useRequestStore";
 import RequestBar from "./request-bar";
 import RequestEditorArea from "./request-editor-area";
+import ResponseViewer from "./response-viewer";
 
 
 export default function RequestEditor() {
-  const { tabs, activeTabId, updateTab ,
-
-  } = useRequestPlaygroundStore();
+  const { tabs, activeTabId, updateTab ,responseViewerData} = useRequestPlaygroundStore();
   const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
 
   if (!activeTab) return null;
@@ -21,11 +20,11 @@ export default function RequestEditor() {
        <RequestEditorArea tab={activeTab} updateTab={updateTab} />
      
      </div>
-       {/* {
+       {
         responseViewerData &&
        <ResponseViewer responseData={responseViewerData} />
        }
-       */}
+      
    </div>
   );
 }

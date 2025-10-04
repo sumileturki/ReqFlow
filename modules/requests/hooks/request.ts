@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   addRequestToCollection,
   getAllRequestFromCollection,
+  run,
   saveRequest,
   type Request,
   
@@ -47,15 +48,17 @@ export function useSaveRequest(id: string) {
 }
 
 
-// export function useRunRequest(requestId: string) {
+export function useRunRequest(requestId: string) {
 
-//     const {setResponseViewerData} = useRequestPlaygroundStore();
-//     const queryClient = useQueryClient();
-//     return useMutation({
-//       mutationFn: async () => await run(requestId),
-//       onSuccess: (data) => {
-//         queryClient.invalidateQueries({ queryKey: ["requests"] });
-//         setResponseViewerData(data);
-//       },
-//     });
-//   }
+    const {setResponseViewerData} = useRequestPlaygroundStore();
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: async () => await run(requestId),
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ["requests"] });
+
+        // @ts-ignore
+        setResponseViewerData(data);
+      },
+    });
+  }

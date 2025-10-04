@@ -19,18 +19,18 @@ model Test {
 }
 
 model User {
-  id            String    @id
+  id            String            @id
   name          String
   email         String
-  emailVerified Boolean   @default(false)
+  emailVerified Boolean           @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
-  workspaces    Workspace[]  @relation("UserWorkspaces")
+  workspaces    Workspace[]       @relation("UserWorkspaces")
   memberships   WorkspaceMember[]
-  
+
   @@unique([email])
   @@map("user")
 }
@@ -45,7 +45,6 @@ model Session {
   userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
 
   @@unique([token])
   @@map("session")
@@ -81,63 +80,61 @@ model Verification {
   @@map("verification")
 }
 
-
 //  Work space  & membership
-model Workspace{
-  id String @id @default(cuid())
-  name String 
+model Workspace {
+  id          String  @id @default(cuid())
+  name        String
   description String?
-  ownerId String
-  owner User @relation("UserWorkspaces", fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String
+  owner       User    @relation("UserWorkspaces", fields: [ownerId], references: [id], onDelete: Cascade)
 
-  members WorkspaceMember[]
+  members     WorkspaceMember[]
   collections Collection[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @default(now()) @updatedAt
 
   @@unique([name, ownerId])
 }
 
-enum MEMBER_ROLE{
+enum MEMBER_ROLE {
   ADMIN
   EDITOR
   VIEWER
 }
 
-model WorkspaceMember{
-  id String @id @default(cuid())
-  role  MEMBER_ROLE @default(ADMIN)
+model WorkspaceMember {
+  id   String      @id @default(cuid())
+  role MEMBER_ROLE @default(ADMIN)
 
-  userId  String
+  userId      String
   workspaceId String
 
-  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  workspace  Workspace @relation(fields: [workspaceId],references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  createdAt   DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([userId, workspaceId])
 }
 
 // collection && request
 
-model Collection{
-  id String @id @default(cuid())
-  name String
+model Collection {
+  id          String  @id @default(cuid())
+  name        String
   description String?
   workspaceId String
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  requests  Request[]
+  requests Request[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-
 }
 
-enum REST_METHOD{
+enum REST_METHOD {
   GET
   POST
   PUT
@@ -146,20 +143,37 @@ enum REST_METHOD{
 }
 
 model Request {
-  id String @id @default(cuid())
-  name String 
-  method REST_METHOD @default(GET)
-  url String
-  parameters  Json?
-  headers Json?
+  id         String      @id @default(cuid())
+  name       String
+  method     REST_METHOD @default(GET)
+  url        String
+  parameters Json?
+  headers    Json?
 
-  body  Json?
+  body     Json?
   response Json?
 
-  collectionId  String
+  collectionId String
 
-  collection  Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
 
+  runs RequestRun[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model RequestRun {
+  id String @id @default(cuid())
+
+  requestId String
+  request   Request @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  status     Int
+  statusText String?
+
+  headers    Json?
+  body       String?
+  durationMs Int?
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
 }

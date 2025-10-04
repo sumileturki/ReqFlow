@@ -19,17 +19,18 @@ model Test {
 }
 
 model User {
-  id            String            @id
-  name          String
-  email         String
-  emailVerified Boolean           @default(false)
-  image         String?
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @default(now()) @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  workspaces    Workspace[]       @relation("UserWorkspaces")
-  memberships   WorkspaceMember[]
+  id               String            @id
+  name             String
+  email            String
+  emailVerified    Boolean           @default(false)
+  image            String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @default(now()) @updatedAt
+  sessions         Session[]
+  accounts         Account[]
+  workspaces       Workspace[]       @relation("UserWorkspaces")
+  memberships      WorkspaceMember[]
+  workspaceInvites WorkspaceInvite[]
 
   @@unique([email])
   @@map("user")
@@ -89,6 +90,7 @@ model Workspace {
   owner       User    @relation("UserWorkspaces", fields: [ownerId], references: [id], onDelete: Cascade)
 
   members     WorkspaceMember[]
+  invities    WorkspaceInvite[]
   collections Collection[]
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @default(now()) @updatedAt
@@ -176,4 +178,20 @@ model RequestRun {
   body       String?
   durationMs Int?
   createdAt  DateTime @default(now())
+}
+
+model WorkspaceInvite {
+  id          String    @id @default(cuid())
+  workspaceId String
+  token       String    @unique
+  email       String?   // Optional email for direct invites
+  expiresAt   DateTime?
+  createdById String
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdBy User      @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+
+  @@unique([workspaceId, email])
 }

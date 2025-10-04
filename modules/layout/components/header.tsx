@@ -2,7 +2,7 @@
 
 import React from "react";
 import { UserProps } from "../types";
-import { PlugZap, Unplug } from "lucide-react";
+import { PlugZap, Unplug, Workflow } from "lucide-react";
 import UserButton from "@/modules/authentication/components/user-button";
 import SearchBar from "./search-bar";
 import InviteMember from "./invite-members";
@@ -19,7 +19,7 @@ const Header = ({ user }: Props) => {
         onClick={() => console.log("PingIt clicked")}
         className="col-span-2 flex items-center space-x-2 hover:opacity-80 ml-4"
       >
-        <PlugZap size={28} className="text-indigo-400" />
+        <Workflow size={28} className="text-indigo-400" />
         <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 250 60"

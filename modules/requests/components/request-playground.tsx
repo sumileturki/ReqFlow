@@ -7,6 +7,8 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { toast } from "sonner";
 import { REST_METHOD } from "@prisma/client";
 import RequestEditor from "./request-editor";
+import { url } from "inspector";
+import SaveRequestToCollectionModal from "@/modules/collections/components/add-request-model";
 
 type Props = {};
 
@@ -17,6 +19,25 @@ const RequestPlayground = (props: Props) => {
 
   const { mutateAsync, isPending } = useSaveRequest(activeTab?.requestId!);
   const [showSaveModal, setShowSaveModal] = useState(false);
+
+  const getCurrentRequestData = () => {
+    if (!activeTab) {
+      return {
+        name: "Untitled Request",
+        method: REST_METHOD.GET as REST_METHOD,
+        url: "https://echo.hoppscotch.io",
+      };
+    }
+  
+    return {
+      name: activeTab.title,
+      method: activeTab.method as REST_METHOD,
+      url: activeTab.url, 
+    };
+  };
+
+ 
+  
 
   useHotkeys(
     "ctrl+s, meta+s",
@@ -103,6 +124,12 @@ const RequestPlayground = (props: Props) => {
 
         <div className="flex-1 overflow-auto">
         <RequestEditor />
+        <SaveRequestToCollectionModal 
+          isModalOpen={showSaveModal}
+          setIsModalOpen={setShowSaveModal}
+          requestData={getCurrentRequestData()}
+          initialName={getCurrentRequestData().name}
+          />
       </div>
       </div>
     </>

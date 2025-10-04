@@ -30,8 +30,8 @@ export function useGetAllRequestFromCollection(collectionId: string) {
 }
 
 export function useSaveRequest(id: string) {
-//   const { updateTabFromSavedRequest, activeTabId } =
-//     useRequestPlaygroundStore();
+  const { updateTabFromSavedRequest, activeTabId } =
+    useRequestPlaygroundStore();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -40,8 +40,8 @@ export function useSaveRequest(id: string) {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
       console.log(data);
 
-    //   // @ts-ignore
-    //   updateTabFromSavedRequest(activeTabId!, data);
+      // @ts-ignore
+      updateTabFromSavedRequest(activeTabId!, data);
     },
   });
 }

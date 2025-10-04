@@ -12,7 +12,7 @@ const Footer = () => {
       {/* Left Side */}
       <div className="flex items-center space-x-2">
         <PlugZap size={18} className="text-indigo-400" />
-        <span className="font-semibold text-indigo-300">PingIt</span>
+        <span className="font-semibold text-indigo-300">EchoBox</span>
         <span className="text-xs text-gray-500">© {new Date().getFullYear()}</span>
       </div>
 

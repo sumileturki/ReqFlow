@@ -41,7 +41,7 @@ const Header = ({ user }: Props) => {
       fontWeight="700"
       fill="url(#pingit-gradient)"
     >
-      PingIt
+      EchoBox
     </text>
 
     <style>{`

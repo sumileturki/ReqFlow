@@ -66,7 +66,7 @@ A modern, collaborative API testing and development platform built with Next.js 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd postboy
+   cd reqflow
    ```
 
 2. **Install dependencies**
@@ -227,4 +227,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Postboy** - Making API testing collaborative and efficient! 🚀
+**ReqFlow** - Making API testing collaborative and efficient! 🚀

@@ -56,27 +56,36 @@ export default function UserButton({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-   const onSignOut = async()=>{
-    await authClient.signOut({
-      fetchOptions:{
-        onSuccess:()=>{
-          router.push("/sign-in")
+  const onSignOut = async () => {
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/sign-in");
+          },
+          onError: (error) => {
+            console.error("Logout error:", error);
+            // Still redirect even if there's an error
+            router.push("/sign-in");
+          }
         }
-      }
-    })
-  }
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Still redirect even if there's an error
+      router.push("/sign-in");
+    }
+  };
 
   const handleLogout = async () => {
-  
-      setIsLoading(true);
-      try {
-        await onSignOut();
-      } catch (error) {
-        console.error("Logout error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    
+    setIsLoading(true);
+    try {
+      await onSignOut();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Get user initials for avatar fallback
